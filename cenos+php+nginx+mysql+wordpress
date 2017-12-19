@@ -1,0 +1,72 @@
+安装PHP：
+下载官网上最新版本的php7.1.9的gz文件
+上传到Linux系统并解压 tar -xzvf php.gz
+安装php
+ ./configure --prefix=/usr/local/php --enable-fpm
+ --with-fpm-user=www --with-fpm-group=www 
+ --enable-phpdbg --enable-phpdbg-webhelper 
+ --enable-mysqlnd --with-pcre-dir --enable-sockets 
+ --enable-sysvmsg --enable-sysvsem --enable-sysvshm 
+ --with-pdo-mysql=mysqlnd --enable-pcntl 
+ --enable-mysqlnd --enable-zip --with-mysqli=mysqlnd 
+ --with-zlib=/user/local/zlib
+
+make
+
+make install
+
+配置php：
+使用php.ini-development作为基础的配置文件php.ini，放到../php/lib文件夹内
+在php.ini文件中配置php最大文件上传大小 upload_max_filesize = 50M
+
+配置nginx：
+/usr/local/nginx/conf文件夹下的nginx.conf文件中修改：
+server_name 192.168.1.199;
+        location ~ \.php$ {
+              client_max_body_size    50m;
+            root           /usr/local/nginx/html;
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  /usr/local/nginx/html$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+        location / {
+              client_max_body_size    50m;  
+            root   html;
+            index  index.html index.php index.htm;
+        }
+其中 root路径可以修改为其他，fastcgi_param中的路径对应修改
+client_max_body_size 设置Post提交文件大小
+location / 中的index中加入index.php
+
+启动nginx、php(安装包安装)
+php: /usr/local/bin/php-fpm
+nginx: /usr/local/nginx/sbin/nginx
+
+安装Wordpress：
+下载最新版本压缩包
+压缩包上传到linux文件夹中，当前位置为/usr/local/中并解压 解压命令：tar -xzvf 文件名
+之后按照 http://192.168.1.199/wordpress/wp-admin/install.php步骤安装就可以了
+
+上传主题时需要Ftp解决办法参见：http://blog.csdn.net/cscj2010/article/details/40582461
+wordpress需要读取写入文件系统的权限
+解决上传主题时提示ftp：
+sudo chown www-data:www-data -R /var/www/
+
+安装之后进入WordPress报错
+undefined function gzinflate() 
+原因：缺少zlib包
+解决方法：
+https://wenku.baidu.com/view/3ea7401faf1ffc4fff47ac11.html
+1.进入php安装包目录中的zlib扩展包 ../安装包路径/ext/zlib/
+2.查看config.m4文件，可能存在config0.m4文件，mv config0.m4 config.m4
+3.找到phpize文件，执行
+4.执行 ./configure --with-php-config=/usr/local/php/bin/php-config --with-zlib=/usr
+ （这步可能会报错，Cannot find autoconf，执行 yum -y autoconf, 这样就可以了）
+ make
+ make install
+ 安装成功后会显示zlib.so的生成路径
+
+5.修改php.ini
+添加extension=zlib.so路径
