@@ -15,8 +15,8 @@ http://blog.csdn.net/u012527802/article/details/52129088
 
 angularjs
 未导入js文件
-![image](https://github.com/0wanglei0/angularJs/blob/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180130153458.png)
-模块未导入插件
 ![image](https://github.com/0wanglei0/angularJs/blob/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180130153530.png)
+模块未导入插件
+![image](https://github.com/0wanglei0/angularJs/blob/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180130153458.png)
 模块未定义变量
 ![image](https://github.com/0wanglei0/angularJs/blob/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180130153513.png)
