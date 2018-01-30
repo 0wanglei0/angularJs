@@ -12,3 +12,11 @@ controller in controller
 
 controller通信
 http://blog.csdn.net/u012527802/article/details/52129088
+
+angularjs
+未导入js文件
+![image]()
+模块未导入插件
+![image]()
+模块未定义变量
+![image]()
