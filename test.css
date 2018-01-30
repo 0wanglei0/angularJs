@@ -1,0 +1,27 @@
+div {
+  --container-bg-color: black;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  padding-top: 40px;
+  box-sizing: padding-box;
+  background-color: var( --container-bf-color, red );
+  color: white;
+  text-align: center;
+}
+
+:root {
+  --base-font-size: 56px;
+  --link-color: black;
+}
+
+p {
+  font-size: var( --base-font-size );
+}
+
+a {
+  font-size: var( --base-font-size );
+  color: var( --link-color );
+}
